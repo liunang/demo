@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="description" content="" />
+  <meta name="author" content="ThemeBucket" />
+
+  <title>常量管理</title>
+  
+  <script>
+		var webPath = "..";
+  </script>
+  <script src="../UI/common/loadCommonCss.js"></script>
+  <style>
+  		.cross,.tick{margin-top:1px; margin-right:132px;}
+  </style>
+</head>
+
+<body>
+	<div class="page-main">
+		  <!--头部导航条 Start-->
+    <div class="row k-navigation"> 
+      <div class="col-xs-6 " id="nav_header" style="">
+        <ol class="list-inline k-navContent" id="navContent">          
+          <li><a id="parentNav">系统管理</a></li>
+          <li>/</li>
+          <li><a id="thisNav">常量管理</a></li>
+        </ol>
+       </div>
+    </div>
+    <!--头部导航条 End-->
+		
+        <div class="container-full k-container" >
+        	 <!--横条 Satrt-->
+      <div class="row k-action">
+        <div class="panel-heading">
+          <strong class="k-action-title">常量管理</strong>          
+        </div>
+      </div>
+      <!--横条 End-->
+       
+      <!--查询Start-->      
+      <div class="row queryFrom-body k-queryFrom">
+       <form id="queryGridForm">
+         <div class="col-sm-3">            
+           <select class="col-sm-2 form-control" id="query_constantFlag" name="constantFlag" >
+                                       <!--  <option class="opt" value="">--请选择--</option>
+               <option class="opt" value="1">职称</option>
+               <option class="opt" value="2">职务</option>-->
+           </select>
+         </div>
+         <div class="col-sm-3">            
+           <input class="form-control" id="query_constantName" placeholder="请输入常量名称" /> 
+         </div>
+         <div class="col-sm-1">            
+           <button type="button" class="btn btn-primary k-btn-blue" id="queryGridBtn"><i class="glyphicon glyphicon-search"></i>&nbsp;查询</button>  
+         </div>
+         <div class="col-sm-1">            
+            <button type="button" class="btn btn-default k-btn-white" data-dismiss="modal" id="resetQueryForm"><i class="glyphicon glyphicon-repeat"></i>&nbsp;清空</button> 
+         </div>
+       </form>                                    
+      </div>      
+      <!--查询 End-->	
+      
+      <div class="row k-action-moudle">
+        <div class="col-sm-1">
+          <button type="button" class="btn btn-primary k-btn-action-blue" id="addBtn" title="新增">新增</button> 
+        </div>             
+        <div class="col-sm-1">
+          <button type="button" class="btn btn-danger k-btn-action-red" id="removeOfNumbersBtn" title="批量删除">批量删除</button> 
+        </div>                         
+      </div> 	
+	       
+				<div class="row table-content k-table-moudle">
+					<div class="fixed-table-content k-table-fixed">
+						<table  class="table table-bordered" id="table">
+							<thead class="fixed-thead">
+								<tr>
+										<th><div class="checker"><span><input type="checkbox" class="uniform emmCheckbox" name="checkboxAll"id="selectremove"/></span></div></th>
+										<th><div>常量类型</div></th>
+										<th><div>常量名称</div></th>
+										
+										<th><div>操作</div></th>
+								</tr>
+							</thead>
+							<tbody id="dataList">
+								
+							</tbody>
+					    </table>
+					</div>
+					<div class="row table-foot">
+						<div class="goto">
+							<a href="javascript:;" id="gotopage" >确定</a>
+							<select id ="setRownum">
+								<option value="10" >10</option>
+								<option value="20">20</option>
+								<option value="50">50</option>
+							</select>
+						</div>
+						<div id="Pagination" class="pagination" ></div>
+					</div>
+	    		</div>
+	    	</div>
+  </div>
+  
+  
+  
+    <!-- 增加 -->
+	<div class="modal fade inmodal" id="addOrEditModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false" >
+		<div class="modal-dialog" style="width: 500px;">
+			<div class="modal-content animated bounceInRight">
+			     <div class="modal-header nt-model-head">
+			          <h5 id="action"></h5>	                                         
+			     </div>
+			     <div class="modal-body" style="height:200px;overflow-y:auto">
+		     		<form role="form" id="addOrEditForm">
+     					<div class="row">
+     						<div class="col-sm-12" hidden>
+									<div class="form-group">
+										<label class="col-sm-4 control-label text-right">常量id<span style="color:red">*</span>： </label>
+										 <div class="col-sm-6">
+											<input check=" "  name="titlePostId" id="addTitlePostId" maxlength="32" />
+											
+										</div>
+									</div>
+							 </div>
+							 <div class="col-sm-12">
+									<div class="form-group">
+										<label class="col-sm-4 control-label text-right">常量类型<span style="color:red">*</span>： </label>
+										 <div class="col-sm-8">
+											<!-- <input check="required "  name="constantFlag" id="addConstantFlag" maxlength="32" /> -->
+											<select class="col-sm-8" id="addConstantFlag" name="constantFlag" >
+		                                                
+											 	</select>
+										</div>
+									</div>
+							 </div>
+							 <div class="col-sm-12" style="margin-top:20px;">
+									<div class="form-group">
+										<label class="col-sm-4 control-label text-right">常量名称<span style="color:red">*</span>： </label>
+										 <div class="col-sm-8">
+											<input class="col-sm-8" check="required"  name="constantName" id="addConstantName" maxlength="100" />
+										</div>
+									</div>	
+							 </div>
+							 
+						</div>
+					 </form>
+			     </div>
+			     <div class="modal-footer text-center" >
+			          <button type="button" class="btn btn-white btn-sm" data-dismiss="modal"><i></i>&nbsp;取消</button>
+			          <button type="button" class="btn btn-primary btn-sm" id="addOrEditSaveBtn"><i class="fa fa-check"></i>&nbsp;保存</button>
+			     </div>
+			 </div>
+		</div>
+	</div>
+	
+	<!-- 增加 END-->
+    
+	<script src="../UI/common/loadCommonJs.js"></script>
+	
+	<script src="./constant.js"></script>
+	
+</body>
+</html>

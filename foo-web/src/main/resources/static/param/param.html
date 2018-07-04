@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="description" content="" />
+<meta name="author" content="ThemeBucket" />
+
+<title>参数管理</title>
+
+<script>
+		var webPath = "..";
+  </script>
+<script src="../UI/common/loadCommonCss.js"></script>
+<style>
+.cross, .tick {
+	margin-top: 1px;
+	margin-right: 132px;
+}
+.control-label{
+  color:#999999 !important;
+  font-weight:400;
+}
+</style>
+</head>
+
+<body>
+	<div class="page-main">
+		<!--头部导航条 Start-->
+		<div class="row k-navigation"> 
+	      <div class="col-xs-6 " id="nav_header" style="">
+	        <ol class="list-inline k-navContent" id="navContent">          
+	          <li><a id="parentNav">系统管理</a></li>
+	          <li>/</li>
+	          <li><a id="thisNav">参数管理</a></li>
+	        </ol>
+	       </div>
+	    </div>
+		<!--头部导航条 End-->
+
+		<!--主体部分 Satrt-->
+		<div class="container-full k-container">
+			<!--横条 Satrt-->
+			<div class="row k-action">
+				<div class="panel-heading">
+					<strong class="k-action-title">参数管理</strong>
+				</div>
+			</div>
+			<!--横条 End-->
+			<!--查询Start-->
+			<div class="row queryFrom-body k-queryFrom">
+			 <form id="queryGridForm">
+				<div class="col-sm-3">
+					<input class="form-control" id="query_paramName"
+						placeholder="请输入参数名称" />
+				</div>
+				<div class="col-sm-1">
+					<button type="button" class="btn btn-primary k-btn-blue"
+						id="queryGridBtn">
+						<i class="glyphicon glyphicon-search"></i>&nbsp;查询
+					</button>
+				</div>
+				<div class="col-sm-1">
+					<button type="button" class="btn btn-default k-btn-white"
+						data-dismiss="modal" id="resetQueryForm">
+						<i class="glyphicon glyphicon-repeat"></i>&nbsp;清空
+					</button>
+				</div>
+			 </form>
+			</div>
+			<!--查询 End-->
+      
+      <div class="row k-action-moudle">
+        <div class="col-sm-1">
+          <button type="button" class="btn btn-primary k-btn-action-blue" id="addBtn" title="新增">新增</button> 
+        </div>             
+        <div class="col-sm-1">
+          <button type="button" class="btn btn-danger k-btn-action-red" id="removeOfNumbersBtn" title="批量删除">批量删除</button> 
+        </div>                         
+      </div>
+      
+		
+			<div class="row table-content k-table-moudle">
+				<div class="fixed-table-content k-table-fixed">
+					<table class="table table-bordered" id="table">
+						<thead class="fixed-thead">
+							<tr>
+								<th><div class="checker">
+										<span><input type="checkbox"
+											class="uniform emmCheckbox" name="checkboxAll"
+											id="selectremove" /></span>
+									</div></th>
+								<th><div>参数名称（英文）</div></th>
+								<th><div>参数名称（中文）</div></th>
+								<th><div>参数值</div></th>
+								<th><div>备注</div></th>
+								<th><div>操作</div></th>
+							</tr>
+						</thead>
+						<tbody id="dataList">
+
+						</tbody>
+					</table>
+				</div>
+				<div class="row table-foot">
+					<div class="goto">
+						<a href="javascript:;" id="gotopage">确定</a> <select
+							id="setRownum">
+							<option value="10">10</option>
+							<option value="20">20</option>
+							<option value="50">50</option>
+						</select>
+					</div>
+					<div id="Pagination" class="pagination"></div>
+				</div>
+			</div>
+		</div>
+
+
+
+		<!-- 增加 -->
+		<div class="modal fade inmodal" id="addOrEditModal" tabindex="-1"
+			role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+			<div class="modal-dialog" style="width: 950px;">
+				<div class="modal-content animated bounceInRight">
+					<div class="modal-header nt-model-head" style="border:none">
+						<h3 id="action"></h3>
+					</div>
+					<div class="modal-body" style="height: 350px; overflow: hidden">
+						<form role="form" id="addOrEditForm" style="padding-left:20px;padding-right:20px">
+								<div class="row">									
+										<div class="form-group">
+											<label class="col-sm-2 control-label">参数名称(英文)<span
+												style="color: red">*</span>
+											</label>
+											<div class="col-sm-4">
+												<input class="form-control" check="required English" name="paramName"
+													id="addParamName" maxlength="32" />
+											</div>									
+											<label class="col-sm-2 control-label">参数名称(中文)<span
+												style="color: red">*</span>
+											</label>
+											<div class="col-sm-4">
+												<input class="form-control" check="required EnOrChinese" name="paramDesc"
+													id="addParamDesc" maxlength="100" />
+											</div>
+										</div>									
+								</div>
+
+								<div class="row" style="padding-top: 20px">									
+										<div class="form-group">
+											<label class="col-sm-2 control-label">参数值<span
+												style="color: red">*</span>
+											</label>
+											<div class="col-sm-4">
+												<input class="form-control" check="required" name="paramValue" id="addParamValue"
+													maxlength="60" />
+											</div>
+										</div>								
+								</div>
+								<div class="row" style="padding-top: 20px">								 				
+										<div class="form-group">
+											<label class="col-sm-2 control-label">备注</label>												
+											<div class="col-sm-10">
+												<textarea class="form-control" rows="5" name="paramRemark" id="addParamRemark"
+													maxlength="100" ></textarea>
+											</div>
+										</div>											
+								</div>
+						</form>
+					</div>
+					<div class="modal-footer text-center">
+						<button type="button" class="btn btn-default btn-lg"
+							data-dismiss="modal" style="width:120px;height:40px">
+							<i class="fa fa-close"></i>&nbsp;取 消
+						</button>
+						<button type="button" class="btn btn-primary btn-lg k-btn-action-blue"
+							id="addOrEditSaveBtn" style="width:120px !important;height:40px">
+							<i class="fa fa-check"></i>&nbsp;保 存
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 增加 END-->
+
+		<script src="../UI/common/loadCommonJs.js"></script>
+
+		<script src="./param.js"></script>
+</body>
+</html>

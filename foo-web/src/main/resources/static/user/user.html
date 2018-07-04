@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="description" content="" />
+  <meta name="author" content="ThemeBucket" />
+
+  <title>系统用户管理</title>
+  
+  <script>
+		var webPath = "..";
+  </script>
+  <script src="../UI/common/loadCommonCss.js"></script>
+  <style>
+	html,body{
+	  background:#F4F6F9;
+	}
+	.cross, .tick {
+		margin-top: 1px;
+		margin-right: 132px;
+	}
+	.control-label{
+  		color:#999999 !important;
+  		font-weight:400;
+	}
+</style>
+</head>
+
+<body>
+	<div class="page-main">
+		<!--头部导航条 Start-->
+	    <div class="row k-navigation"> 
+	      <div class="col-xs-6 " id="nav_header" style="">
+	        <ol class="list-inline k-navContent" id="navContent">          
+	          <li><a id="parentNav">人员管理</a></li>
+	          <li>/</li>
+	          <li><a id="thisNav">系统用户管理</a></li>
+	        </ol>
+	       </div>
+	    </div>
+	    <!--头部导航条 End-->
+		<!--主体部分 Satrt-->
+		<div class="container-full k-container">
+		
+			<!--横条 Satrt-->
+			<div class="row k-action">
+        <div class="panel-heading">
+          <strong class="k-action-title">系统用户</strong>          
+        </div>
+      </div>
+			<!--横条 End-->
+
+			<!--查询Start-->			
+			<div class="row queryFrom-body k-queryFrom">
+				<form id="queryGridForm">
+					<div class="col-sm-3">						
+						<input class="form-control" id="query_userName" placeholder="请输入用户名" />	
+					</div>
+					<div class="col-sm-3">						
+						<input class="form-control" id="query_realName" placeholder="请输入姓名" />	
+					</div>
+		          	<div class="col-sm-1">            
+		            	<button type="button" class="btn btn-primary k-btn-blue" id="queryGridBtn" ><i class="glyphicon glyphicon-search"></i>&nbsp;查询</button>  
+		          	</div>
+		          	<div class="col-sm-1">            
+		            	<button type="button" class="btn btn-default k-btn-white" data-dismiss="modal" id="resetQueryForm"><i class="glyphicon glyphicon-repeat"></i>&nbsp;清空</button> 
+		          	</div>  	
+		          </form>												
+			</div>			
+			<!--查询 End-->
+
+      <div class="row k-action-moudle">       	     
+		<div class="col-sm-1">    	     
+		     <button type="button" class="btn btn-primary k-btn-action-blue" id="addBtn" title="新增" >新增</button>
+		</div>	        
+      </div>
+		
+			<!--表格部分 Start-->
+			<div class="row table-content k-table-moudle">
+				<div class="fixed-table-content k-table-fixed">
+					<table class="table table-hover" id="table">
+						<thead class="fixed-thead">
+							<tr>
+								<th>
+								 <div class="checker">
+									<span><input type="checkbox"
+										class="uniform emmCheckbox" name="checkboxAll"
+										id="selectremove" /></span>
+								 </div>
+								</th>
+									<th><div>用户名</div></th>
+									<th><div>姓名</div></th>
+									<th><div>性别</div></th>
+									<th><div>电话</div></th>
+									<th><div>邮箱</div></th>
+									<th><div>注册时间</div></th>
+									<th><div>操作</div></th>
+							</tr>
+						</thead>
+						<tbody id="dataList">
+
+						</tbody>
+					</table>
+				</div>
+				<div class="row table-foot">
+					<div class="goto">
+						<a href="javascript:;" id="gotopage">确定</a> <select
+							id="setRownum">
+							<option value="10">10</option>
+							<option value="20">20</option>
+							<option value="50">50</option>
+						</select>
+					</div>
+					<div id="Pagination" class="pagination"></div>
+				</div>
+			</div>
+			<!--表格部分 End-->
+			
+		</div>
+	</div>
+	<!--主体部分 End-->
+        
+  
+  
+  
+    <!-- 添加和修改Modal Start-->
+	<div class="modal fade inmodal" id="addOrEditModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false" >
+		<div class="modal-dialog" style="width: 950px;">
+			<div class="modal-content animated bounceInRight">
+			     <div class="modal-header nt-model-head" style="border:none">
+						<h3 id="action"></h3>
+					</div>
+			     <div class="modal-body" style="height:480px;overflow-y:auto;">
+		     		<form role="form" id="addOrEditForm" style="padding-left:20px;padding-right:20px">
+     					<div class="row">
+							 <div class="col-sm-12">
+								<div class="col-sm-6">
+									<div class="form-group">
+										 <label class="col-sm-4 control-label text-right" >用户名<span style="color:red">*</span></label>
+										 <div class="col-sm-8">
+											<input class="form-control" check="required EnOrNum"  name="username" id="addUserName" maxlength="8" />	
+										</div>
+									</div>	
+								</div>
+								<div class="col-sm-6">
+										<div class="form-group">
+										<label class="col-sm-4 control-label text-right">姓名<span style="color:red">*</span></label>
+										 <div class="col-sm-8">
+											<input class="form-control" check="required EnOrChinese"  name="realname" id="addRealName" maxlength="10" />
+										</div>
+									</div>		
+								</div>
+							 </div>
+							 <div class="col-sm-12" style="padding-top:20px">
+								<div class="col-sm-6" id="passw1">
+									<div class="form-group">
+										<label class="col-sm-4 control-label text-right" >密码<span style="color:red">*</span></label>
+										<div class="col-sm-8">
+										<input class="form-control" type="password" check="required Password1"  name="password" id="addPassword1" maxlength="10" />
+										</div>
+										<div class="col-sm-4"></div>
+										<span class="col-sm-8" style="font-size:12px">密码为6~10个字符之间的字母和数字组合！</span>
+									</div>
+								</div>
+								<div class="col-sm-6" id="passw2">
+									<div class="form-group">
+										<label class="col-sm-4 control-label text-right">确认密码<span style="color:red">*</span></label>
+										<div class="col-sm-8">
+										<input class="form-control" check="required Password2"  type="password"  name="confirmPassword" id="addPassword2" maxlength="10" />
+										</div>
+										<div class="col-sm-4"></div>
+										<span class="col-sm-8" style="font-size:12px;">密码为6~10个字符之间的字母和数字组合！</span>
+									</div>
+								</div>
+							 </div>
+							 <div class="col-sm-12" style="padding-top:10px">
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label class="col-sm-4 control-label text-right" >移动电话 <span style="color:red">*</span></label>
+										<div class="col-sm-8">
+										<input class="form-control" check="required MobilePhone"  name=" mobile" id="addMobile" maxlength="11" />	
+										</div>
+										
+									</div>	
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label class="col-sm-4 control-label text-right" >性别<span style="color:red">*</span></label>
+										<!-- <input check="Sex"  name="sex" id="addSex" maxlength="1" /> -->
+										<div class="col-sm-8">
+										 <select class="form-control" id="addSex" name="sex" >
+			                                                <option class="opt" value="0">--请选择--</option>
+															<option class="opt" value="男">男</option>
+															<option class="opt" value="女">女</option>
+			                             </select>
+			                           </div>
+									</div>
+								</div>
+							 </div>
+							 <div class="col-sm-12" style="padding-top:20px">
+								<div class="col-sm-6">
+									<div class="form-group">
+										
+										<label class="col-sm-4 control-label text-right" >电子邮箱</label>
+										<div class="col-sm-8">
+										<input class="form-control" check="Email"  name="email" id="addEmail" maxlength="30" />
+										</div>
+									</div>	
+								</div>
+								<div class="col-sm-6">
+									<!-- <div class="form-group">
+										<label class="text-right" style="padding-left:37px;">性别</label>
+										<input check="Sex"  name="sex" id="addSex" maxlength="1" />
+									</div>	 -->
+								</div>
+							 </div>
+							<div class="col-sm-12" style="margin-top:20px;">
+								<div class="form-group">
+									
+									<div class="row">
+										<div class="col-sm-6">
+											<div class="col-sm-4 text-right" style="padding-right:0;">
+												<label class="text-right control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;角色<span style="color:red">*</span></label>
+											</div>
+											<div class="col-sm-8" style="padding-right:0;">
+												<select name="from" id="multiselect"
+													class="form-control" size="8" multiple="multiple"
+													style="padding-top:18px !important;height:223px;" id="allRole">
+												</select> 
+												<label class="title control-label"
+													style="position:relative;top:-231px;left:30px;background:#fff;">可选角色
+												</label>
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="col-sm-4" style="height:223px;padding-top:40px;padding-right:40;">
+												<button type="button" id="rightAll"
+													class="btn btn-block">
+													<i class="glyphicon glyphicon-forward"></i>
+												</button>
+												<button type="button" id="rightSelected"
+													class="btn btn-block">
+													<i class="glyphicon glyphicon-chevron-right"></i>
+												</button>
+												<button type="button" id="leftSelected"
+													class="btn btn-block">
+													<i class="glyphicon glyphicon-chevron-left"></i>
+												</button>
+												<button type="button" id="leftAll" class="btn btn-block">
+													<i class="glyphicon glyphicon-backward"></i>
+												</button>
+											</div>
+											<div class="col-sm-8">
+												<select name="to" id="multiselect_to"
+													class="form-control" size="8" multiple="multiple"
+													style="padding-top:18px !important; height:223px;" id="selectRole">
+												</select>
+												<label class="title control-label"
+													style="position:relative;top:-231px;left:30px;background:#fff;">拥有角色
+												</label>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					 </form>
+			     </div>
+			     <div class="modal-footer text-center">
+						<button type="button" class="btn btn-default btn-lg"
+							data-dismiss="modal" style="width:120px;height:40px">
+							<i class="fa fa-close"></i>&nbsp;取 消
+						</button>
+						<button type="button" class="btn btn-primary btn-lg k-btn-action-blue"
+							id="addOrEditSaveBtn" style="width:120px !important;height:40px">
+							<i class="fa fa-check"></i>&nbsp;保 存
+						</button>
+					</div>
+			 </div>
+		</div>
+	</div>
+	
+	<!-- 添加和修改Modal End-->
+	
+    
+	<script src="../UI/common/loadCommonJs.js"></script>
+	
+	<script src="./user.js"></script>
+	
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="">
+  <meta name="author" content="ThemeBucket">
+
+  <title>用户管理</title>
+  
+  <script>
+		var webPath = "..";
+  </script>
+  <script src="../UI/common/loadCommonCss.js"></script>
+ <style>
+ 	
+ 	html,body{
+	  background:#F4F6F9;
+	}
+ </style>
+</head>
+
+<body>
+	<div class="page-main">
+		<!--头部导航条 Start-->
+	    <div class="row k-navigation"> 
+	      <div class="col-xs-6 " id="nav_header" style="">
+	        <ol class="list-inline k-navContent" id="navContent">          
+	          <li><a id="parentNav">人员管理</a></li>
+	          <li>/</li>
+	          <li><a id="thisNav">系统用户管理</a></li>
+	        </ol>
+	       </div>
+	    </div>
+	    <!--头部导航条 End-->
+		<!--主体部分 Satrt-->
+		<div class="container-full k-container">
+		
+			<!--横条 Satrt-->
+			<div class="row k-action">
+        <div class="panel-heading">
+          <strong class="k-action-title">用户详情</strong>
+          <div class="panel-heading-button pull-right">         
+             <a class="btn" id="addBtn" onclick="javascript:history.back();" title="返回">
+              <i class="glyphicon glyphicon-share-alt" style="transform:scaleX(-1);"></i>&nbsp;返&nbsp;回
+            </a> 
+          </div>         
+        </div>
+      </div>
+			<!--横条 End-->
+		
+			<!--表格部分 Start-->
+			<div class="row table-content k-table-moudle">
+				<div class="" style="margin-top:30px;">
+						<table class="table table-bordered noneSelect"  style=" margin:0 auto;position:relative;word-break: keep-all !important;width:95%;border-radius:20px;">
+							<tbody>
+								<tr >
+									<td class="propertyName table-param-name" > 用户名</td>
+									<td class="table-param-value" ><span id="userName" style="padding-left:20px;"></span></td>
+									<td class="propertyName table-param-name" >姓名</td>
+									<td class="table-param-value"><span id="realName" style="padding-left:20px;"></span></td>
+								</tr>
+								
+								<tr>
+									<td class="propertyName table-param-name">移动电话</td>
+									<td class="table-param-value"><span id="mobilePhone" style="padding-left:20px;"></span></td>
+								    <td class="propertyName table-param-name">邮箱</td>
+								    <td class="table-param-value"><span id="email" style="padding-left:20px;"></span></td>
+								</tr>
+								<tr>
+									<td class="propertyName table-param-name">性别</td>
+									<td class="table-param-value"><span id="sex" style="padding-left:20px;"></span></td>
+									<td class="propertyName table-param-name">创建时间</td>
+								    <td class="table-param-value"><span id="registerTime" style="padding-left:20px;"></span></td>
+								</tr>
+								
+								<tr>
+								    <td class="propertyName table-param-name">角色</td>
+								    <td class="table-param-value"><span id="roleNames" style="padding-left:20px;"></span></td>
+								    
+								</tr>
+							</tbody>
+					</table>
+				</div>
+				
+			</div>
+			<!--表格部分 End-->
+			
+		</div>
+	</div>
+	<!--主体部分 End-->
+  
+	<script src="../UI/common/loadCommonJs.js"></script>
+	<script src="./detailsUser.js"></script>
+	
+</body>
+</html>
