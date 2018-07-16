@@ -4,7 +4,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +23,7 @@ import com.nantian.foo.web.util.vo.ResultInfo;
 public class OrgController
 {
 
-	private static Logger log = Logger.getLogger(OrgController.class.getName());
+	private static Logger log = LoggerFactory.getLogger(OrgController.class.getName());
 	private OrgService orgService;
     @Autowired
     public OrgController(OrgService orgService) {
@@ -206,30 +207,7 @@ public class OrgController
 		}
 		return resultInfo;
 	}
-	/**
-	 * 查询出机构号重复的数据
-	 * 
-	 * @throws Exception
-	 */
-	/*@RequestMapping("/queryOrgInfoByOrgCodeRepeat")
-    @ResponseBody
-	public void queryOrgInfoByOrgCodeRepeat() throws Exception
-	{
-		ResultInfo resultInfo = new ResultInfo();
-		try {
-			List list = reportService.queryReportDataList("queryOrgCodeRepeat", new HashMap<String, String>());
-			resultInfo.setNumber(list.size());
-			resultInfo.setData(list);
-			resultInfo.setSuccess("true");
-		}
-		catch (Exception e)
-		{
-			log.error(e.getMessage());
-            resultInfo.setSuccess("false");
-            resultInfo.setData(e.getMessage());
-		}
-	}*/
-	
+
 	@RequestMapping("/getOrgTree")
     @ResponseBody
 	public ResultInfo getOrgTree() throws Exception

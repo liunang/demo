@@ -59,7 +59,7 @@ public interface OrgService
 	 * @throws ServiceException
 	 */
 	public void removeOrgInfo(OrgTreeNode orgTreeNode, LoginBean loginBean) throws ServiceException;
-	
+
 	/**
 	 * 审批机构信息
 	 * @param orgTreeNode
@@ -68,7 +68,7 @@ public interface OrgService
 	 * @throws ServiceException
 	 */
 	//public OrgTreeNode approveOrg(OrgTreeNode orgTreeNode,String userName)throws ServiceException;
-  
+
   /**
    * 获取已审批机构树
    * @param orgId

@@ -31,7 +31,7 @@
     </root>
 
 	<!-- 单独配置console 日志级别为debug -->
-    <logger name="com.nantian.nfcm" level="DEBUG" additivity="false">
+    <logger name="com.nantian.foo" level="DEBUG" additivity="false">
         <appender-ref ref="console"/>
     </logger>
 </configuration>

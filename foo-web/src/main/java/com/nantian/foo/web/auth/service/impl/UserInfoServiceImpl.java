@@ -27,6 +27,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserInfoServiceImpl implements UserInfoService {
@@ -46,10 +47,9 @@ public class UserInfoServiceImpl implements UserInfoService {
         List<Long> toIds = new ArrayList<>();
         List<String> item;
         if (userName != null && userName.trim().length() > 0) {
-            UserInfo userInfo = userInfoDao.findOne(userName);
-            if (userInfo == null) {
-                throw new ServiceException("用户已被其他用户删除");
-            } else {
+            Optional<UserInfo> optionalUserInfo = userInfoDao.findById(userName);
+            if(optionalUserInfo.isPresent()){
+                UserInfo userInfo = optionalUserInfo.get();
                 Long roleId;
                 userBean = po2vo(userInfo);
                 List<RoleInfo> roleInfos = userRoleDao.findRoleInfoByUserName(userName);
@@ -63,9 +63,11 @@ public class UserInfoServiceImpl implements UserInfoService {
                     userBean.getOwnerRoles().add(item);
                 }
             }
+            else {
+                throw new ServiceException("用户不存在或已被删除");
+            }
         } else {
             userBean = new UserBean();
-         
         }
         fillNotOwnerRoles(toIds, userBean.getNotOwnerRoles(), loginBean);
         return userBean;
@@ -76,7 +78,6 @@ public class UserInfoServiceImpl implements UserInfoService {
 		String editerOrgPath=loginBean.getOrgPath();
 		if(!(loginBean.suAuthentication() || (editerOrgPath!=null && orgPath!=null && orgPath.startsWith(editerOrgPath))))
 		{
-			//throw new ServiceException("user.unpermit", new String[] { userName });
 			throw new ServiceException("无权编辑用户["+userName+"]信息");
 		}
 	}
@@ -84,11 +85,12 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Transactional
     public UserBean addUserInfo(UserBean userBean,LoginBean loginBean) throws ServiceException {
         String userName = userBean.getUserName();
-        UserInfo userInfo = userInfoDao.findOne(userName);
-        if (userInfo != null) {
+        Optional<UserInfo> optionalUserInfo = userInfoDao.findById(userName);
+        if(optionalUserInfo.isPresent()) {
             throw new ServiceException("用户已存在[添加失败]");
-        } else {
-            userInfo = vo2po(userBean);
+        }
+        else {
+            UserInfo userInfo = vo2po(userBean);
             String pwd = userBean.getPwd();
             if (pwd != null && pwd.length() > 0) {
                 userInfo.setPwd(BaseUtil.getMD5Encode(userName + pwd));
@@ -109,15 +111,13 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Transactional
     public UserBean updateUserInfo(UserBean userBean,LoginBean loginBean) throws ServiceException {
         String userName = userBean.getUserName();
-        UserInfo userInfo = userInfoDao.findOne(userName);
-        if (userInfo == null) {
-            throw new ServiceException("用户不存在[修改失败]");
-        } 
-        else if("admin".equals(userName)||"developer".equals(userName))
+        Optional<UserInfo> optionalUserInfo = userInfoDao.findById(userName);
+        if("admin".equals(userName)||"developer".equals(userName))
         {
-        	 throw new ServiceException("管理用户不能修改[修改失败]");
-        }else {
-            //vo2po会覆盖pwd，需要先为userBean赋值
+            throw new ServiceException("管理用户不能修改[修改失败]");
+        }
+        else if(optionalUserInfo.isPresent()){
+            UserInfo userInfo = optionalUserInfo.get();
             userBean.setPwd(userInfo.getPwd());
             userBean.setRegisterTime(userInfo.getRegisterTime());
             userInfo = vo2po(userBean);
@@ -140,32 +140,35 @@ public class UserInfoServiceImpl implements UserInfoService {
                     userRoleDao.save(userRole);
                 }
             } else {
-                userRoleDao.delete(userRoles);
+                userRoleDao.deleteAll(userRoles);
             }
             return userBean;
+        }
+        else {
+            throw new ServiceException("用户不存在[修改失败]");
         }
     }
 
     @Transactional
     public void delUserInfo(UserBean userBean,LoginBean loginBean) throws ServiceException {
         String userName = userBean.getUserName();
-        UserInfo userInfo = userInfoDao.findOne(userName);
-        if (userInfo == null) {
-            throw new ServiceException("用户不存在[删除失败]");
-        } 
-        else if("admin".equals(userName)||"developer".equals(userName))
+        Optional<UserInfo> optionalUserInfo = userInfoDao.findById(userName);
+        if("admin".equals(userName)||"developer".equals(userName))
         {
-       	 throw new ServiceException("管理用户不能删除[删除失败]");
-       }
-        else {
-            userInfoDao.delete(userName);
+            throw new ServiceException("管理用户不能删除[删除失败]");
+        }
+        else if(optionalUserInfo.isPresent()){
+            userInfoDao.deleteById(userName);
             userRoleDao.deleteByUserName(userName);
+        }
+        else {
+            throw new ServiceException("用户不存在[删除失败]");
         }
     }
 
     @Override
     public GridData<UserBean> findByCondition(int page, int size, UserBean userBean,LoginBean loginBean) throws ServiceException {
-        Pageable pageable = new PageRequest(page, size, Sort.Direction.ASC, "registerTime");
+        Pageable pageable = PageRequest.of(page, size, Sort.Direction.ASC, "registerTime");
 
         Specification<UserInfo> specification = (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
@@ -254,10 +257,6 @@ public class UserInfoServiceImpl implements UserInfoService {
                     notOwnerRoles.add(item);
                 }
             }
-            else{
-                continue;
-            }
-
             /*if (roleId >= BaseConst.CORE_AUTHORITY_LIMIT && (!ownerRoleIds.contains(roleId))
                     && (loginBean.rootAuthentication()|| editorUserName.equals(roleCreator))
                     ) {
@@ -271,36 +270,34 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     public UserBean resetUserPwd(UserBean userBean,LoginBean loginBean) throws ServiceException {
         String userName = userBean.getUserName();
-        UserInfo userInfo = (UserInfo) userInfoDao.findOne(userName);
-        if (userInfo == null) {
-            throw new ServiceException("用户已被其他用户删除");
-        } 
-        else if("admin".equals(userName)||"developer".equals(userName))
+        Optional<UserInfo> optionalUserInfo = userInfoDao.findById(userName);
+        if("admin".equals(userName)||"developer".equals(userName))
         {
-        	 throw new ServiceException("管理用户不能重置密码[重置密码失败]");
+            throw new ServiceException("管理用户不能重置密码[重置密码失败]");
         }
-        else{
-        	//String orgPath = userInfo.getOrgPath();
-			//judgePermitEdit(loginBean,userName,orgPath);
+        else if(optionalUserInfo.isPresent()){
+            UserInfo userInfo = optionalUserInfo.get();
             String pwd = BaseUtil.getMD5Encode(userName + "e10adc3949ba59abbe56e057f20f883e");
             userInfo.setPwd(pwd);
             userInfoDao.save(userInfo);
             return po2vo(userInfo);
+        }
+        else
+        {
+            throw new ServiceException("用户不存在或已被删除");
         }
     }
 
     @Override
     public boolean queryIsInitPw(LoginBean loginBean) throws ServiceException {
         String userName = loginBean.getUserName();
-        UserInfo userInfo = (UserInfo) userInfoDao.findOne(userName);
-        if (userInfo != null) {
+        Optional<UserInfo> optionalUserInfo = userInfoDao.findById(userName);
+        if(optionalUserInfo.isPresent()){
+            UserInfo userInfo = optionalUserInfo.get();
             String dbPw = userInfo.getPwd();
-            if (dbPw.equals(BaseUtil.getMD5Encode(userName + "e10adc3949ba59abbe56e057f20f883e"))) {
-                return true;
-            } else {
-                return false;
-            }
-        } else {
+            return dbPw.equals(BaseUtil.getMD5Encode(userName + "e10adc3949ba59abbe56e057f20f883e"));
+        }
+        else {
             return false;
         }
     }
@@ -312,43 +309,34 @@ public class UserInfoServiceImpl implements UserInfoService {
 	 * @return UserBean
 	 */
 	public UserBean updateUserSelf(UserBean userBean, String userName)
-			throws ServiceException
-	{
-		String userNameSelf = userBean.getUserName();
-		if (userName.equals(userNameSelf))
-		{
-			UserInfo userInfo = (UserInfo) userInfoDao.findOne(userName);
-			if (userInfo == null)
-			{
-				throw new ServiceException("用户已被其他用户删除");
-			}
-			else
-			{
-				if (userInfo.getPwd()!=null && userInfo.getPwd().equals(BaseUtil.getMD5Encode(userName+userBean.getOldPwd())))
-				{
-					//userInfo.setTelephone(userBean.getTelephone());
-					//userInfo.setMobilePhone(userBean.getMobilePhone());
-					//userInfo.setEmail(userBean.getEmail());
-					//userInfo.setFax(userBean.getFax());
-					String pwd = userBean.getPwd();
-					if (pwd != null && pwd.length() > 0 && !pwd.equalsIgnoreCase("d41d8cd98f00b204e9800998ecf8427e"))
-					{
-						userInfo.setPwd(BaseUtil.getMD5Encode(userName+pwd));
-					}
-					userInfoDao.save(userInfo);
-					return po2vo(userInfo);
-				}
-				else
-				{
-					throw new ServiceException("旧密码错误!");
-				}
-			}
-		}
-		else
-		{
-			throw new ServiceException("user.unSelfUpdate", new String[] { userName });
-		}
-	}
+			throws ServiceException {
+        String userNameSelf = userBean.getUserName();
+        if (userName.equals(userNameSelf)) {
+            Optional<UserInfo> optionalUserInfo = userInfoDao.findById(userName);
+            if (optionalUserInfo.isPresent()) {
+                UserInfo userInfo = optionalUserInfo.get();
+                if (userInfo.getPwd() != null && userInfo.getPwd().equals(BaseUtil.getMD5Encode(userName + userBean.getOldPwd()))) {
+                    //userInfo.setTelephone(userBean.getTelephone());
+                    //userInfo.setMobilePhone(userBean.getMobilePhone());
+                    //userInfo.setEmail(userBean.getEmail());
+                    //userInfo.setFax(userBean.getFax());
+                    String pwd = userBean.getPwd();
+                    if (pwd != null && pwd.length() > 0 && !pwd.equalsIgnoreCase("d41d8cd98f00b204e9800998ecf8427e")) {
+                        userInfo.setPwd(BaseUtil.getMD5Encode(userName + pwd));
+                    }
+                    userInfoDao.save(userInfo);
+                    return po2vo(userInfo);
+                } else {
+                    throw new ServiceException("旧密码错误!");
+                }
+            } else {
+                throw new ServiceException("用户不存在或已被删除");
+            }
+
+        } else {
+            throw new ServiceException("user.unSelfUpdate", new String[]{userName});
+        }
+    }
     
 	
 	public List<UserInfo> queryUserOptions(String loginUserName,String roleName) throws ServiceException {

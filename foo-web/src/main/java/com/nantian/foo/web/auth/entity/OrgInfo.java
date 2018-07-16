@@ -104,55 +104,6 @@ public class OrgInfo implements java.io.Serializable
 		this.areaCode=areaCode;
 	}
 
-	/** full constructor */
-	/*public OrgInfo(String orgId, String parentId, String orgName,
-			String orgCode, String parentOrgCode, String orgAddr,
-			String orgManager, String orgTelephone,
-			String orgPath, String editor, String approver,
-			String approvalTime, String lastEditTime, String editFlag,
-			Set orgInfos, Set userInfos) {
-		this.orgId = orgId;
-		this.parentId = parentId;
-		this.orgName = orgName;
-		this.orgCode = orgCode;
-		this.parentOrgCode = parentOrgCode;
-		this.orgAddr = orgAddr;
-		this.orgManager = orgManager;
-		this.orgTelephone = orgTelephone;
-		this.orgPath = orgPath;
-		this.editor = editor;
-		this.approver = approver;
-		this.approvalTime = approvalTime;
-		this.lastEditTime = lastEditTime;
-		this.editFlag = editFlag;
-		this.orgInfos = orgInfos;
-		this.userInfos = userInfos;
-	}
-
-	public OrgInfo(String orgId, String parentId, String orgName,
-			String orgCode, String parentOrgCode, String orgAddr,
-			String orgManager, String orgTelephone, String orgPath,
-			String editor, String approver, String approvalTime,
-			String lastEditTime, String editFlag, String parentOrgName,
-			Set orgInfos, Set userInfos) {
-		this.orgId = orgId;
-		this.parentId = parentId;
-		this.orgName = orgName;
-		this.orgCode = orgCode;
-		this.parentOrgCode = parentOrgCode;
-		this.orgAddr = orgAddr;
-		this.orgManager = orgManager;
-		this.orgTelephone = orgTelephone;
-		this.orgPath = orgPath;
-		this.editor = editor;
-		this.approver = approver;
-		this.approvalTime = approvalTime;
-		this.lastEditTime = lastEditTime;
-		this.editFlag = editFlag;
-		this.parentOrgName = parentOrgName;
-		this.orgInfos = orgInfos;
-		this.userInfos = userInfos;
-	}*/
 
     @Id
     @Column(name = "org_id")
@@ -175,7 +126,7 @@ public class OrgInfo implements java.io.Serializable
 
 	public void setParentId(Long parentId)
 	{
-		this.parentId = (parentId!=null)?parentId:null;
+		this.parentId = parentId;
 	}
 	@Basic
     @Column(name = "org_name")
@@ -184,10 +135,10 @@ public class OrgInfo implements java.io.Serializable
 		return this.orgName;
 	}
 
-	public void setOrgName(String orgName)
-	{
+	public void setOrgName(String orgName) {
 		this.orgName = orgName;
 	}
+
 	@Basic
     @Column(name = "org_code")
 	public String getOrgCode()
@@ -295,48 +246,4 @@ public class OrgInfo implements java.io.Serializable
 	public void setAreaCode(String areaCode) {
 		this.areaCode = areaCode;
 	}
-	
-	
-	
-	/*public String getParentOrgCode()
-	{
-		return parentOrgCode;
-	}
-	
-	public void setParentOrgCode(String parentOrgCode)
-	{
-		this.parentOrgCode = (parentOrgCode!=null && parentOrgCode.trim().length()>0)?parentOrgCode:"";
-	}
-	
-	public String getParentOrgName() {
-		return parentOrgName;
-	}
-
-	public void setParentOrgName(String parentOrgName) {
-		this.parentOrgName = parentOrgName;
-	}*/
-	/*public Set getOrgInfos()
-	{
-		return this.orgInfos;
-	}
-
-	public void setOrgInfos(Set orgInfos)
-	{
-		this.orgInfos = orgInfos;
-	}
-
-	public Set getUserInfos()
-	{
-		return this.userInfos;
-	}
-
-	public void setUserInfos(Set userInfos)
-	{
-		this.userInfos = userInfos;
-	}*/
-
-	
-
-	
-	
 }

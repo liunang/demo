@@ -12,12 +12,15 @@
 <script src="./UI/js/jquery-accordion-menu.js"></script>
 <script src="./mainpage.js"></script>
 <script src="./updatePwd.js"></script>
+
+ <style>
+  	.cross,.tick{margin-top: -22px; margin-right: 78px}
+   
+  </style>
+
 <style type="text/css">
 *{box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;}
-
-body{
-background:#f0f0f0;
-}
+body{background:#f0f0f0;}
 .content{width:260px;}
 .filterinput{
 	background-color:rgba(249, 244, 244, 0);
@@ -33,17 +36,6 @@ background:#f0f0f0;
 	width:100%;
 }
 
-.cross,.tick{margin-top: -25px; margin-right: -20px}
-  
-.dropdown-toggle:hover + .dropdown-menu{
-  display:block !important
-}
-.dropdown-menu:hover{
-  display:block !important
-}
-.dropdown-menu{
-  cursor:pointer
-}
 .navbar-static-side{
 	z-index: 2001;
     width: 100%;
@@ -55,21 +47,25 @@ background:#f0f0f0;
   border-radius: 50%;
 }
 
+.clickMenu{
+	background:#686767 !important;
+}
+
 .gradualColor{
 	width:100%;
 	height:45px;
 	text-align: center;
-	background:#0077FF;
-	filter: progid:DXImageTransform.Microsoft.Gradient(startColorStr='#5b84b2',endColorStr='#cde6c7',gradientType='1');
-	background: -moz-linear-gradient(left, #0077FF, #0077FF);
-	background: -o-linear-gradient(left,#0077FF, #0077FF);
-	background: -webkit-gradient(linear, 0% 0%, 100% 0%, from(#0077FF), to(#0077FF));
-	z-index:1;
+	background:#5b84b2;
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorStr='#5b84b2',endColorStr='#0bf2cd',gradientType='1');
+	background: -moz-linear-gradient(left, #5b84b2, #0bf2cd);
+	background: -o-linear-gradient(left,#5b84b2, #0bf2cd);
+	background: -webkit-gradient(linear, 0% 0%, 100% 0%, from(#5b84b2), to(#0bf2cd));
+	z-index:-1;
 }
 
 </style>
 </head>
-<body style="padding:0px;margin:0px;overflow:hidden;width:100%">
+<body style="padding:0px;margin:0px;overflow:hidden;width:100%;">
 	<div style="width:100%;" id="mainPage">
 	<table style="width:100%;border:none !important">
 		<tr style="width:100%">
@@ -77,13 +73,9 @@ background:#f0f0f0;
 				<div class ="navbar-static-side" id="navMenu">
 					<div style="width:100%;margin:0px;" >
 						<div  style="margin:0px;padding:0px;width:100%;">
-							<div id="jquery-accordion-menu" class="jquery-accordion-menu" style="margin:0px;padding:0px;width:100%;" >						  
-								<div class="jquery-accordion-menu-header" style="height:280px;text-align:center;padding-right:22px;">
-									<!-- TODO logo -->
-									<img alt="image" style="height:115px;margin-left:0%;margin-top:45px" src="UI/img/logo3.png" />
-									<p style="font-size:1.4em;line-height:1.4em;margin-top:20px;font-weight:300">云南省环境保护厅</p>
-									<p style="font-size:1.1em;line-height:1.1em;font-weight:300">培训服务平台</p>
-									<p style="border-bottom:1px solid #FFFFFF;margin-top:20px"></p>
+							<div id="jquery-accordion-menu" class="jquery-accordion-menu" style="margin:0px;padding:0px;width:100%;" >
+								<div class="jquery-accordion-menu-header" style="height:130px;">
+									<img alt="image" style="height:60px;margin-left:0%;margin-top:5%" src="UI/img/login.png" />
 								</div>
 								<ul id="demo-list" style="margin:0px;width:100%">
 								</ul>
@@ -101,115 +93,24 @@ background:#f0f0f0;
 					  	<table style="border:none !important">
 					  		<tr>
 					  			<!-- <td id="initWarning"><span style="color:#FFF492;font-weight:bold;margin-right:10px;text-decoration:blink;cursor:pointer" onclick="showUpdatePwModel()">请修改初始密码&nbsp;&nbsp;<i class="icon-arrow-right"></i></span></td> -->
-					  			<!-- <td><p style="color:#fff;font-size:18px;margin-right:40px;margin-top:8px;cursor:pointer" id="getUserName" data-target="#myModal" data-toggle="tooltip" data-placement="bottom" title="点击用户名进行个人密码修改!"></p></td>
-					  			<td><p style="color:#fff;font-size:18px;margin-right:40px;margin-top:8px;cursor:pointer" id="logout"><img  alt="Exit" src="UI/img/Exit.png"/>退出</p></td> -->
-					  		   <td>
-					  		     <p class="dropdown-toggle" data-toggle="dropdown" id="getUserName" style="color:#fff;font-size:18px;margin-right:50px;margin-top:9px;">
-					  		   </td>
-					  		   <td>
-                     <span id="logout" class="glyphicon glyphicon-off" style="color:#fff;font-size:18px;margin-right:50px;cursor:pointer"></span>
-                   </td>
-					  		   <td>
-					  		     <ul class="nav navbar-nav">								     
-									      <li class="dropdown">
-									        <p class="dropdown-toggle" data-toggle="dropdown" style="color:#fff;font-size:18px;margin-right:100px;margin-top:12px;cursor:pointer">
-									         <span class="glyphicon glyphicon-cog"></span>
-									        </p>
-									        <ul class="dropdown-menu" style="margin-top:-10px">
-									          <li><a id="changePwd"><i class="glyphicon glyphicon-retweet"></i>&nbsp;&nbsp;修改密码</a></li>
-									          <!-- <li><a id="logout"><i class="glyphicon glyphicon-log-out"></i>&nbsp;&nbsp;退出</a></li>		 -->							  
-									        </ul>
-									      </li>
-									    </ul>
-					  		   </td>
+					  			<td><p style="color:#fff;font-size:18px;margin-right:40px;margin-top:8px;cursor:pointer" id="getUserName" data-target="#myModal" data-toggle="tooltip" data-placement="bottom" title="点击用户名进行个人密码修改!"></p></td>
+					  			<td><p style="color:#fff;font-size:18px;margin-right:40px;margin-top:8px;cursor:pointer" id="logout"><img  alt="Exit" src="UI/img/Exit.png"/>退出</p></td>
 					  		</tr>
 					  	</table>
-		         </div>
+		               </div>
 					</div>
 				</div>
-				<div  style="background:#f0f0f0;width:100%;position:fixed;">
-					<iframe frameborder="0"  style="width:85%;height:1055px;margin-left:0px;border:0;" id="subIframe"  src="welcome.html"></iframe>
+				<div  style="background:#ffffff;width:100%;position:fixed">
+					<iframe frameborder="0"  style="width:80%;height:1055px;margin-left:0px;border:0" id="subIframe"  src=""></iframe>
 				</div>
-				
-				<div style="width:100%;height:45px;line-height:45px;background:#F4F4F9;position:fixed;bottom:0;text-align:right;">
-				   <p style="color:#999999;margin-right:400px">Copyright 云南省环保信息中心</p>
-				</div>
-			</td>		
+			</td>
 	   </tr>
 	</table>
-	
 	</div>
 
      <!-- 密码修改-->
-    <div class="modal fade inmodal" id="changPseModal" tabindex="-1"
-		role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-		<div class="modal-dialog">
-			<div class="modal-content animated bounceInRight">
-				<div class="modal-header nt-model-head" style="border:none">
-					<h3 id="action" style="text-align:center">
-						<b id="trainNoticeName">密码修改</b>
-						<span class="glyphicon glyphicon-remove" data-dismiss="modal" style="float:right;cursor:pointer"></span>
-					</h3>
-				</div>
-				<div class="modal-body" style="height: 350px; overflow: hidden; margin: 0 14px 0 14px;background:#F1F1F1">    									
-					<div class="row text-center" style="margin-top: 20px;text-align:center">
-							     <form role="form" id="addOrEditForm" style="padding-left:25%;">
-						     		  <div class="row">
-									  <div class="form-group">
-									    <div class="col-sm-8">
-									      <input type="password" class="form-control" id="oldPwd" placeholder="请输入旧密码！" />
-									      </div>
-									  </div>
-									</div>
-									<br></br>
-									<div class="row">
-									  <div class="form-group">
-									   
-									    <div class="col-sm-8">
-									    	<input type="password" class="form-control" id="newPwd" placeholder="请输入新密码!" maxlength="10"/>
-									   </div>
-									  <!--  <span class="col-sm-4" style="font-size:12px">密码为6~10个字符之间的字母和数字组合！</span> -->
-									 </div>
-								   </div> 
-								   <br></br>
-									 <div class="row">
-									  <div class="form-group">
-									   
-									    <div class="col-sm-8">
-									    	<input type="password" class="form-control" id="againPwd" placeholder="请再次输入密码!" maxlength="10" />
-									   </div>
-									   <!-- <span class="col-sm-4" style="font-size:12px">密码为6~10个字符之间的字母和数字组合！</span> -->
-									 </div>
-									</div> 
-									<br></br>
-									<div class="row">
-									  <div class="form-group">
-									    <div class="col-sm-8">
-									    	<span style="font-size:12px">密码为6~10个字符之间的字母和数字组合！</span>
-									   </div>
-									   
-									 </div>
-									</div>
-							</form>							
-					</div>
-					
-            	</div>
-            	<div class="modal-footer text-center">
-						<button type="button" class="btn btn-default btn-lg"
-							data-dismiss="modal" style="width:120px;height:40px">
-							<i class="fa fa-close"></i>&nbsp;取 消
-						</button>
-						<button type="button" class="btn btn-primary btn-lg k-btn-action-blue"
-							id="addOrEditSaveBtn" style="width:120px !important;height:40px">
-							<i class="fa fa-check"></i>&nbsp;保 存
-						</button>
-					</div>
-			</div>
-				
-			</div>
-		</div>
-	
-	<!-- <div class="modal fade inmodal" id="changseModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false" >
+    
+	<div class="modal fade inmodal" id="addOrEditModal" tabindex="-1" role="dialog" aria-hidden="true"  >
 		<div class="modal-dialog">
 			<div class="modal-content animated bounceInRight">
 			     <div class="modal-header nt-model-head">
@@ -254,12 +155,10 @@ background:#f0f0f0;
 			     </div>
 			 </div>
 		</div>
-	</div> -->
+	</div>
 	
 	<!-- 密码修改END-->
-	<script type="text/javascript" src="UI/ext/js/ext-all.js"></script>
-	<script type="text/javascript" src="UI/ext/locale/locale-zh_CN.js"></script>
-	<script type="text/javascript" src="UI/ext/js/DatePickerWithSeconds.js"></script>
+	
 	<script type="text/javascript">
 (function($) {
 $.expr[":"].Contains = function(a, i, m) {
@@ -268,7 +167,7 @@ $.expr[":"].Contains = function(a, i, m) {
 
 })(jQuery);	
 
-	
+
 </script>
 
 </body>

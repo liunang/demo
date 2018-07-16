@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <title>云南省环境保护厅|培训服务平台</title>
+    <title>产品防伪溯源平台</title>
     <link href="./UI/s-view/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="./login/css/login.css" rel="stylesheet" type="text/css"/>
     <link href="./UI/s-view/layer/skin/layer.css" rel="stylesheet"/>
@@ -17,105 +17,94 @@
 
     <script src="./UI/s-view/layer/layer.js"></script>
     <script src="./login/login.js" type="text/javaScript"></script>
-    <style>
-      .form-control{
-        -webkit-box-shadow:0 0 0 50px #FFFFFF inset;
-        height:50px;
-        border-left:none !important
-      }
-      .glyphicon{
-        color:#999999;
-        padding-left:10px;
-        font-size:1.2em;
-      }
-      #submit1{
-        border:none !important;
-        outline:none;
-        box-shadow: rgb(168, 168, 168) 0px 0px 20px;
-      }
-      @media screen and (max-width: 1920px) {
-			    body {
-			        zoom:98%
-			    }
-			}
-			
-			@media screen and (max-width: 1024px) {
-			    body {
-			        zoom:80%
-			    }
-			}
-			
-			@media screen and (max-width: 850px) {
-			    body {
-			        zoom:70%
-			    }
-			}
-			
-			@media screen and (max-width: 450px) {
-			    body {
-			        zoom:50%
-			    }
-			}
-    </style>
 </head>
-<body style="background-color: #FFFFFF;">
-  <div class="container-full">
-   <div class="row">
-      <div class="col-sm-6">
-        <img src="./UI/img/login.jpg" style="background-size: 100%; height: 100%;max-height:105vh" class="img-responsive" alt="背景图">
-      </div>
-      <div class="col-sm-6">
-        <div class="row" style="margin-top:30px">
-          <div class="col-sm-3 col-sm-offset-9">
-            <img src="./UI/img/logo.png" style="width:150px;height:150px" class="img-responsive" alt="logo">
-          </div>
-        </div>
-        <div class="row" style="margin-top:5vh">
-	        <div class="col-sm-8 col-sm-offset-2">
-	          <p style="font-size:8vh;color:#888;font-weight:300">WELCOME</p>
-	        </div>
-        </div>
-        <div class="row" style="margin-top:10px">
-	        <div class="col-sm-8 col-sm-offset-2">
-	          <p style="font-size:4vh;color:#999999;font-weight:300">云南省环境保护厅<span>&nbsp;&nbsp;</span><span>培训服务平台</span></p>
-	        </div>
-        </div>
-        <div class="row" style="margin-top:40px">       
-				    <form class="bs-example bs-example-form" role="form">
-				        <div class="row">
-				            <div class="col-sm-7 col-sm-offset-2">
-				                <div class="input-group">
-				                    <span class="input-group-btn">
-                                 <button class="btn btn-default" disabled style="height:50px;"><span class="glyphicon glyphicon-user"></span></button>
-                             </span>
-				                    <input type="text" id="username" class="form-control">
-				                </div>
-				            </div>					            
-				        </div>
-				        <div class="row" style="margin-top:20px">
-                    <div class="col-sm-7 col-sm-offset-2">
-                        <div class="input-group">
-                            <span class="input-group-btn">
-                                 <button class="btn btn-default" disabled  style="height:50px"><span class="glyphicon glyphicon-lock"></span></button>
-                             </span>
-                            <input type="password" id="password" class="form-control">
-                        </div>
-                    </div>                      
-                </div>               
-                <div class="row" style="margin-top:50px;">
-                    <div class="col-sm-3 col-sm-offset-6">
-                       <button type="button" class="btn btn-primary btn-block" id="submit1" style="border:none;border-radius:30px;height:40px;background:#0099FF">登     录</button>
-                    </div>                      
-                </div>
-                <div class="row" style="margin-top:50px;">
-                    <div class="col-sm-3 col-sm-offset-6">
-                       <p style="color:#999999">温馨提示：建议使用&nbsp;<a href="https://www.google.cn/intl/zh-CN/chrome/" style="text-decoration:underline">谷歌浏览器</a></p>
-                    </div>                      
-                </div>
-				    </form>
-        </div>
-      </div>      
-   </div>
+<body style="background-color: #F3F3F4;">
+<!--head-->
+<div id="head" style="background: #F3F3F4">
+    <div class="top">
+        <div class="fl"><img src="./login/images/maop-logo.png"/></div>
+        <div class="fl"><img src="./login/images/maop-li.png"/></div>
+        <div class="fl yahei26" style="font-weight:bold">产品防伪溯源平台</div>
+    </div>
 </div>
+
+<!--login box-->
+<div class="wrapper">
+    <div id="box" style="background: #ede4bd">
+        <div class="loginbar" style="background: #2F4050;color:#fff">用户登录</div>
+        <div id="tabcon">
+            <div class="box show">
+                <input type="text" class="user yahei16" id="username" value=""/><br/><br/>
+                <input type="password" class="pwd yahei16" id="password" value=""/><br/><br/>
+                <input id="submit1" type="button" class="log jc yahei16" stye="background:#aabbcc" value="登 录"/>&nbsp;
+                &nbsp; &nbsp; <input type="reset" value="取 消" class="reg jc yahei18"/>
+            </div>
+            <div align="center" style="margin-top:10px;font-size:14px;font-weight:bold"><span>温馨提示：建议使用谷歌浏览器</span>
+            </div>
+            <div align="center" >
+            <div id="systemAppBtn"><p style="margin-top:10px;font-size:14px;cursor:pointer;text-decoration:underline">点击获取管理员手机应用</p></div>
+            
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<div id="flash" style="padding-top:20px;">
+    <div class="pos">
+        <a id="flash1" style="display:block;"><img src="./login/images/login.jpg"/></a>
+    </div>
+</div>
+
+<!--bottom-->
+<div id="bottom" style="background: #F3F3F4">
+    <div id="copyright">
+        <div class="quick">
+            <ul style="display: none;">
+                <li><input type="button" class="quickbd iphone" onclick="location.href='http://www.nantian.com.cn/'"/>
+                </li>
+                <li><input type="button" class="quickbd android" onclick="location.href='http://www.nantian.com.cn/'"/>
+                </li>
+                <li><input type="button" class="quickbd pc" onclick="location.href='http://www.nantian.com.cn/'"/></li>
+                <div class="clr"></div>
+            </ul>
+            <div class="clr"></div>
+        </div>
+        <div class="text" style="margin-top: 15px;display: none;">
+            Copyright © 2015-2020 云南南天信息设备有限公司 All Rights Reserved 服务电话：0871-65353338
+        </div>
+    </div>
+</div>
+
+<div class="modal fade inmodal" id="erWeiMaModal" tabindex="-1" role="dialog" aria-hidden="true"  >
+		<div class="modal-dialog" style="width: 600px;">
+			<div class="modal-content animated bounceInRight">
+			     <div class="modal-header nt-model-head">
+			          <h5 id="action">使用手机扫一扫下载应用</h5>	                                         
+			     </div>
+			     <div class="modal-body" style="height:350px;overflow-y:auto">
+		     		
+   					<div class="row">
+					<div class="col-sm-12" style="padding-top:10px">
+						 <div class="col-sm-12" style="font-size:14px;font-weight:bold;">
+								
+								<div align="center"  class="col-sm-6">
+									 <img style="width:200px;height:200px;" src="./login/images/systemApp.png"/>
+									 <div style="padding-top:20px;"><p>茶城系统用户应用</p></div>
+								</div>
+								<div align="center" class="col-sm-6">
+									 <img style="width:200px;height:200px;" src="./login/images/firmApp.png"/>
+									 <div style="padding-top:20px;"><p>茶城厂商用户应用</p></div>
+								</div>
+							
+							
+						</div>
+					</div>
+			     </div>
+			     
+			 </div>
+		</div>
+	</div>
+
 </body>
 </html>

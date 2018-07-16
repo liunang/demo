@@ -1,9 +1,6 @@
 package com.nantian.foo.web.util.service.impl;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,8 +45,9 @@ public class LoginServiceImpl implements LoginService {
 			String userName = loginBean.getUserName();
 			String orgName="";
 			if (userName != null && !userName.equals("")) {
-				UserInfo userInfo = userInfoDao.findOne(userName);
-				if (userInfo != null) {
+				Optional<UserInfo> optionalUserInfo = userInfoDao.findById(userName);
+				if(optionalUserInfo.isPresent()){
+					UserInfo userInfo = optionalUserInfo.get();
 					String pwd = userInfo.getPwd();
 					if (pwd != null && pwd.equals(BaseUtil.getMD5Encode(userName + loginBean.getPwd()))) {
 						String realName=userInfo.getRealName();
@@ -62,7 +60,8 @@ public class LoginServiceImpl implements LoginService {
 					{
 						throw new ServiceException("密码错误");
 					}
-				} else {
+				}
+				else {
 					throw new ServiceException("用户不存在");
 				}
 			} else {

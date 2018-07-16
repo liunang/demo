@@ -11,7 +11,7 @@ $(function() {
 			}
 	);
 	function logoutSys(){
-		/*if(confirm("是否确认登出系统？")){
+		if(confirm("是否确认登出系统？")){
 			util.emmAjax({
 				url : './logOut.action',
 				loading:false,
@@ -22,32 +22,14 @@ $(function() {
 					}
 				}
 			});
-		}*/
-		util.mainConfirmView(function(){
-			util.emmAjax({
-				url : './logOut.action',
-				loading:false,
-				success : function(data) {
-					var obj = eval('(' + data + ')');
-					if(obj.success=="true"){
-						window.location.href = './';
-					}
-				}
-			});
-		},'是否确认退出系统？')
+		}
 	}
-	/*$("#getUserName").click(function(){
+	$("#getUserName").click(function(){
 		resetAddOrEditForm();
 		$("#action").html('密码修改');
-		$("#changPseModal").modal("show");
+		$("#addOrEditModal").modal("show");
 		updatePwd(loginUserName);
-	});*/
-	$('#changePwd').click(function(){
-		resetAddOrEditForm();
-		$("#action").html('密码修改');
-		$("#changPseModal").modal("show");
-		updatePwd(loginUserName);
-	})
+	});
 });
 clearAddOrEidtPsw=function(){
 	check.clear("oldPwd");
@@ -86,7 +68,7 @@ function loadLoginUserInfo() {
 			var obj = eval('(' + data + ')');
 			loginUserName = obj.data.userName;
 			loginUserRealName = obj.data.realName;
-			$("#getUserName").html("<i class='glyphicon glyphicon-user'></i>&nbsp;"+loginUserRealName);
+			$("#getUserName").html("用户名："+loginUserRealName);
 			
 		}
 	});

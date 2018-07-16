@@ -1,6 +1,7 @@
 package com.nantian.foo.web.util.web;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -17,7 +18,7 @@ import com.nantian.foo.web.util.vo.ResultInfo;
 @Controller
 public class ParamConstroller
 {
-	private static Logger log = Logger.getLogger(ParamConstroller.class.getName());
+	private static Logger log = LoggerFactory.getLogger(ParamConstroller.class.getName());
 	
 	@Autowired
 	private ParamService paramService;

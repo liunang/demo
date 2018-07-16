@@ -27,26 +27,7 @@ $(function () {
     $("#systemAppBtn").click(function () {
     	$("#erWeiMaModal").modal("show");
     });
-    
-
 });
-
-
-$(document).ready(function () {
-    var theWindow = $(window);
-
-    function resized() {
-    	var msg = "您的浏览器可能缩放了，如果不能查看全部内容，请按下F11键";
-    	layer.msg(msg,{
-    		offset: '20px',
-    		time: 8000
-    	});  	
-    }
-    theWindow.resize(function () {
-        resized();
-    }).trigger('resize');
-});
-
 
 document.onkeydown = onEnterDown;
 

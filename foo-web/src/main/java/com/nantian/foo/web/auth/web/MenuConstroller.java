@@ -2,7 +2,8 @@ package com.nantian.foo.web.auth.web;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +17,7 @@ import com.nantian.foo.web.util.vo.ResultInfo;
 @Controller
 @RequestMapping(value = "/menu")
 public class MenuConstroller {
-    private static Logger log = Logger.getLogger(MenuConstroller.class.getName());
+    private static Logger log = LoggerFactory.getLogger(MenuConstroller.class.getName());
     @Autowired
     private MenuService menuService;
 

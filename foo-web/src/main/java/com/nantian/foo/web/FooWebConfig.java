@@ -2,12 +2,10 @@ package com.nantian.foo.web;
 
 import com.nantian.foo.web.util.web.BaseInterceptor;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.*;
 
 @Configuration
-public class FooWebConfig extends WebMvcConfigurerAdapter{
+public class FooWebConfig implements WebMvcConfigurer {
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(new BaseInterceptor())
@@ -21,7 +19,6 @@ public class FooWebConfig extends WebMvcConfigurerAdapter{
 				.excludePathPatterns("/login")
 				.excludePathPatterns("loginPrompt.html")
 				.excludePathPatterns("/");
-		super.addInterceptors(registry);
 	}
 
 	public void addViewControllers(ViewControllerRegistry registry) {
