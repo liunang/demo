@@ -28,7 +28,7 @@ public class RoleInfoController {
 
    
 
-    @RequestMapping("/findById")
+    @RequestMapping("/findById.action")
     @ResponseBody
     private ResultInfo findById(RoleBean roleBean) throws Exception {
         ResultInfo resultInfo = new ResultInfo();
@@ -45,7 +45,7 @@ public class RoleInfoController {
         return resultInfo;
     }
 
-    @RequestMapping("/findByCondition")
+    @RequestMapping("/findByCondition.action")
     @ResponseBody
     private ResultInfo findByCondition(HttpServletRequest request, int page, int size, RoleBean roleBean) throws Exception {
         ResultInfo resultInfo = new ResultInfo();
@@ -67,7 +67,7 @@ public class RoleInfoController {
         return resultInfo;
     }
 
-    @RequestMapping("/addRole")
+    @RequestMapping("/addRole.action")
     @ResponseBody
     private ResultInfo addRole(HttpServletRequest request,RoleBean roleBean) throws Exception {
         ResultInfo resultInfo = new ResultInfo();
@@ -85,7 +85,7 @@ public class RoleInfoController {
         return resultInfo;
     }
 
-    @RequestMapping("/updateRole")
+    @RequestMapping("/updateRole.action")
     @ResponseBody
     private ResultInfo updateRole(RoleBean roleBean) throws Exception {
         ResultInfo resultInfo = new ResultInfo();
@@ -101,7 +101,7 @@ public class RoleInfoController {
         return resultInfo;
     }
 
-    @RequestMapping("/delRole")
+    @RequestMapping("/delRole.action")
     @ResponseBody
     private ResultInfo delRole(RoleBean roleBean) throws Exception {
         ResultInfo resultInfo = new ResultInfo();
@@ -116,7 +116,7 @@ public class RoleInfoController {
         return resultInfo;
     }
     
-    @RequestMapping("/loadAuthorityCheckTree")
+    @RequestMapping("/loadAuthorityCheckTree.action")
     @ResponseBody
     private ResultInfo loadAuthorityCheckTree(HttpServletRequest request,RoleBean roleBean) throws Exception {
         ResultInfo resultInfo = new ResultInfo();
@@ -137,7 +137,7 @@ public class RoleInfoController {
     }
     
     
-    @RequestMapping("/beforeUpdateRole")
+    @RequestMapping("/beforeUpdateRole.action")
     @ResponseBody
     private ResultInfo beforeUpdateRole(HttpServletRequest request,RoleBean roleBean) throws Exception {
         ResultInfo resultInfo = new ResultInfo();
@@ -158,7 +158,7 @@ public class RoleInfoController {
     }
     
     
-    @RequestMapping("/checkCanRemoveRole")
+    @RequestMapping("/checkCanRemoveRole.action")
     @ResponseBody
     private ResultInfo checkCanRemoveRole(HttpServletRequest request,RoleBean roleBean) throws Exception {
         ResultInfo resultInfo = new ResultInfo();
@@ -177,7 +177,7 @@ public class RoleInfoController {
         }
         return resultInfo;
     }
-    @RequestMapping("/isExitRoleByCreator")
+    @RequestMapping("/isExitRoleByCreator.action")
     @ResponseBody
     public ResultInfo isExitRoleByCreator(RoleBean roleBean) throws Exception {
         ResultInfo resultInfo = new ResultInfo();

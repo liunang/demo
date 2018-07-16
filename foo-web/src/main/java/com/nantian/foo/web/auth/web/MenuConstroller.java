@@ -22,7 +22,7 @@ public class MenuConstroller {
     private MenuService menuService;
 
 
-    @RequestMapping("/menuTreeByUser")
+    @RequestMapping("/menuTreeByUser.action")
     @ResponseBody
     public ResultInfo menuTreeByUser(HttpServletRequest request) {///
         ResultInfo resultInfo = new ResultInfo();
@@ -39,7 +39,7 @@ public class MenuConstroller {
         return resultInfo;
     }
 
-    @RequestMapping("/queryMenuTreeAll")
+    @RequestMapping("/queryMenuTreeAll.action")
     @ResponseBody
     public ResultInfo queryMenuTreeAll(HttpServletRequest request) {
         ResultInfo resultInfo = new ResultInfo();
@@ -56,7 +56,7 @@ public class MenuConstroller {
         return resultInfo;
     }
 
-    @RequestMapping("/findMenuById")
+    @RequestMapping("/findMenuById.action")
     @ResponseBody
     public ResultInfo findMenuById(MenuTreeNode menuTreeNode) {
         ResultInfo resultInfo = new ResultInfo();
@@ -72,7 +72,7 @@ public class MenuConstroller {
         return resultInfo;
     }
 
-    @RequestMapping("/addMenu")
+    @RequestMapping("/addMenu.action")
     @ResponseBody
     public ResultInfo addMenu(MenuTreeNode menuTreeNode) {
         ResultInfo resultInfo = new ResultInfo();
@@ -88,7 +88,7 @@ public class MenuConstroller {
         return resultInfo;
     }
 
-    @RequestMapping(value = "/updateMenu", method = RequestMethod.POST)
+    @RequestMapping(value = "/updateMenu.action", method = RequestMethod.POST)
     @ResponseBody
     public ResultInfo updateMenu(MenuTreeNode menuTreeNode) {
         ResultInfo resultInfo = new ResultInfo();
@@ -105,7 +105,7 @@ public class MenuConstroller {
 
     }
 
-    @RequestMapping("/removeMenu")
+    @RequestMapping("/removeMenu.action")
     @ResponseBody
     public ResultInfo removeMenu(MenuTreeNode menuTreeNode) {
         ResultInfo resultInfo = new ResultInfo();

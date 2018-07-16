@@ -1,5 +1,9 @@
 package com.nantian.foo.web.util.web;
 
+import com.nantian.foo.web.util.entity.Param;
+import com.nantian.foo.web.util.service.ParamService;
+import com.nantian.foo.web.util.vo.ParamBean;
+import com.nantian.foo.web.util.vo.ResultInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,11 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.nantian.foo.web.util.entity.Param;
-import com.nantian.foo.web.util.service.ParamService;
-import com.nantian.foo.web.util.vo.ParamBean;
-import com.nantian.foo.web.util.vo.ResultInfo;
-
 
 @RequestMapping(value = "/param")
 @Controller
@@ -20,10 +19,14 @@ public class ParamConstroller
 {
 	private static Logger log = LoggerFactory.getLogger(ParamConstroller.class.getName());
 	
+	private final ParamService paramService;
+
 	@Autowired
-	private ParamService paramService;
-	
-	@RequestMapping("/findParam")
+	public ParamConstroller(ParamService paramService) {
+		this.paramService = paramService;
+	}
+
+	@RequestMapping("/findParam.action")
 	@ResponseBody
 	public ResultInfo findParam(int page, int size, Param param)
 	{
@@ -44,7 +47,7 @@ public class ParamConstroller
 		return resultInfo;
 	}
 	
-	@RequestMapping("/addParam")
+	@RequestMapping("/addParam.action")
 	@ResponseBody
 	public ResultInfo addParam(Param param)
 	{
@@ -63,7 +66,7 @@ public class ParamConstroller
 		return resultInfo;
 	}
 	
-	@RequestMapping("/findParamById")
+	@RequestMapping("/findParamById.action")
 	@ResponseBody
 	public ResultInfo findParamById(Param param)
 	{
@@ -82,7 +85,7 @@ public class ParamConstroller
 		return resultInfo;
 	}
 	
-	@RequestMapping("/updateParam")
+	@RequestMapping("/updateParam.action")
 	@ResponseBody
 	public ResultInfo updateParam(Param param)
 	{
@@ -101,7 +104,7 @@ public class ParamConstroller
 		return resultInfo;
 	}
 	
-	@RequestMapping("/removeParam")
+	@RequestMapping("/removeParam.action")
 	@ResponseBody
 	public ResultInfo removeParam(Param param)
 	{
@@ -120,7 +123,7 @@ public class ParamConstroller
 		return resultInfo;
 	}
 	
-	@RequestMapping("/removeParams")
+	@RequestMapping("/removeParams.action")
 	@ResponseBody
 	public ResultInfo removeParams(ParamBean paramBean)
 	{

@@ -27,7 +27,7 @@ public class UserInfoController {
         this.userInfoService = userInfoService;
     }
 
-    @RequestMapping("/findById")
+    @RequestMapping("/findById.action")
     @ResponseBody
     private ResultInfo findById(HttpServletRequest request,UserBean userBean) throws Exception {
         ResultInfo resultInfo = new ResultInfo();
@@ -46,7 +46,7 @@ public class UserInfoController {
         return resultInfo;
     }
 
-    @RequestMapping("/findByCondition")
+    @RequestMapping("/findByCondition.action")
     @ResponseBody
     private ResultInfo findByCondition(HttpServletRequest request,int page, int size, UserBean userBean) throws Exception {
         ResultInfo resultInfo = new ResultInfo();
@@ -69,7 +69,7 @@ public class UserInfoController {
         return resultInfo;
     }
 
-    @RequestMapping("/addUser")
+    @RequestMapping("/addUser.action")
     @ResponseBody
     private ResultInfo addUser(HttpServletRequest request,UserBean userBean) throws Exception {
         ResultInfo resultInfo = new ResultInfo();
@@ -87,7 +87,7 @@ public class UserInfoController {
         return resultInfo;
     }
 
-    @RequestMapping("/updateUser")
+    @RequestMapping("/updateUser.action")
     @ResponseBody
     private ResultInfo updateUser(HttpServletRequest request,UserBean userBean) throws Exception {
         ResultInfo resultInfo = new ResultInfo();
@@ -105,7 +105,7 @@ public class UserInfoController {
         return resultInfo;
     }
 
-    @RequestMapping("/delUser")
+    @RequestMapping("/delUser.action")
     @ResponseBody
     private ResultInfo delUser(HttpServletRequest request,UserBean userBean) throws Exception {
         ResultInfo resultInfo = new ResultInfo();
@@ -123,7 +123,7 @@ public class UserInfoController {
     }
     
     
-    @RequestMapping("/resetPassword")
+    @RequestMapping("/resetPassword.action")
     @ResponseBody
     private ResultInfo resetPassword(HttpServletRequest request,UserBean userBean) throws Exception {
         ResultInfo resultInfo = new ResultInfo();
@@ -141,7 +141,7 @@ public class UserInfoController {
         return resultInfo;
     }
     
-    @RequestMapping("/updateUserSelfPassword")
+    @RequestMapping("/updateUserSelfPassword.action")
     @ResponseBody
 	public ResultInfo updateUserSelfPassword(HttpServletRequest request,UserBean userBean)throws Exception
 	{
@@ -168,7 +168,7 @@ public class UserInfoController {
      * @return ResultInfo
      * @throws Exception
      */
-    @RequestMapping("/queryUserOptions")
+    @RequestMapping("/queryUserOptions.action")
     @ResponseBody
     private ResultInfo queryUserOptions(HttpServletRequest request,UserBean userBean) throws Exception {
         ResultInfo resultInfo = new ResultInfo();

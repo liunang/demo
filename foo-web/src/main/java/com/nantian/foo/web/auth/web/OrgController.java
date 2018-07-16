@@ -31,7 +31,7 @@ public class OrgController
     }
 	//private OrgTreeNode orgTreeNode = new OrgTreeNode();
 
-	@RequestMapping("/checkIsRemoveOrg")
+	@RequestMapping("/checkIsRemoveOrg.action")
     @ResponseBody
 	public ResultInfo checkIsRemoveOrg(OrgTreeNode orgTreeNode) throws Exception
 	{
@@ -55,7 +55,7 @@ public class OrgController
 	 * 
 	 * @throws Exception
 	 */
-	@RequestMapping("/addOrgInfo")
+	@RequestMapping("/addOrgInfo.action")
     @ResponseBody
 	public ResultInfo addOrgInfo(HttpServletRequest request,OrgTreeNode orgTreeNode) throws Exception
 	{
@@ -82,7 +82,7 @@ public class OrgController
 	 * 
 	 * @throws Exception
 	 */
-	@RequestMapping("/updateOrgInfo")
+	@RequestMapping("/updateOrgInfo.action")
     @ResponseBody
 	public ResultInfo updateOrgInfo(HttpServletRequest request,OrgTreeNode orgTreeNode) throws Exception
 	{
@@ -110,7 +110,7 @@ public class OrgController
 	 * 
 	 * @throws Exception
 	 */
-	@RequestMapping("/removeOrgInfo")
+	@RequestMapping("/removeOrgInfo.action")
     @ResponseBody
 	public ResultInfo removeOrgInfo(HttpServletRequest request,OrgTreeNode orgTreeNode) throws Exception
 	{
@@ -138,7 +138,7 @@ public class OrgController
 	 * 
 	 * @throws Exception
 	 */
-	@RequestMapping("/getOrgTreeSync")
+	@RequestMapping("/getOrgTreeSync.action")
     @ResponseBody
 	public ResultInfo getOrgTreeSync(HttpServletRequest request) throws Exception
 	{
@@ -166,7 +166,7 @@ public class OrgController
 	 * 
 	 * @throws Exception
 	 */ 
-	@RequestMapping("/queryApprovedOrgInfos")
+	@RequestMapping("/queryApprovedOrgInfos.action")
     @ResponseBody
 	public ResultInfo queryApprovedOrgInfos(int page, int size,OrgTreeNode orgTreeNode) throws Exception
 	{
@@ -188,7 +188,7 @@ public class OrgController
 		return resultInfo;
 	}
 
-	@RequestMapping("/queryOrgInfo")
+	@RequestMapping("/queryOrgInfo.action")
     @ResponseBody
 	public ResultInfo queryOrgInfo(OrgTreeNode orgTreeNode) throws Exception
 	{
@@ -208,7 +208,7 @@ public class OrgController
 		return resultInfo;
 	}
 
-	@RequestMapping("/getOrgTree")
+	@RequestMapping("/getOrgTree.action")
     @ResponseBody
 	public ResultInfo getOrgTree() throws Exception
 	{
@@ -229,7 +229,7 @@ public class OrgController
 	}
 	
 	
-	@RequestMapping("/queryOrgInfoByParentId")
+	@RequestMapping("/queryOrgInfoByParentId.action")
     @ResponseBody
 	public ResultInfo queryOrgInfoByParentId(HttpServletRequest request,OrgTreeNode orgTreeNode) throws Exception
 	{
