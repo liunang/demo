@@ -407,7 +407,6 @@ public class OrgServiceImpl implements OrgService {
             }
 
         } else {
-
             orgInfos = orgDao.findByParentId(Long.parseLong(parentId));
         }
         List<OrgTreeNode> orgTreeNodes = new ArrayList<>();

@@ -36,14 +36,13 @@ public class LoginServiceImpl implements LoginService {
 	/**
 	 * 用户登录：1、判断用户是否存在；2、密码是否匹配；3、用户权限载入
 	 * 
-	 * @param loginBean
-	 *            用户登录名,密码,远程机IP地址
-	 * @throws ServiceException
+	 * @param loginBean LoginBean  用户登录名,密码,远程机IP地址
+	 * @throws ServiceException ServiceException
 	 */
 	public void saveLogin(LoginBean loginBean) throws ServiceException {
 		if (loginBean != null) {
 			String userName = loginBean.getUserName();
-			String orgName="";
+			//String orgName="";
 			if (userName != null && !userName.equals("")) {
 				Optional<UserInfo> optionalUserInfo = userInfoDao.findById(userName);
 				if(optionalUserInfo.isPresent()){
@@ -54,6 +53,7 @@ public class LoginServiceImpl implements LoginService {
 						loginBean.setRealName(realName);
 						String loginTime=DateUtil.getCurrentTime("yyyy-MM-dd HH:mm:ss");
 						loginBean.setLoginTime(loginTime);
+						loginBean.setOrgId(userInfo.getOrgId());
 						setUserInfo(loginBean,userName);
 					}
 					else
@@ -73,8 +73,8 @@ public class LoginServiceImpl implements LoginService {
 	/**
 	 * 登出
 	 * 
-	 * @param loginBean
-	 * @throws ServiceException
+	 * @param loginBean LoginBean
+	 * @throws ServiceException ServiceException
 	 */
 	public void removeLogin(LoginBean loginBean) throws ServiceException {
 		//TODO 登出操作

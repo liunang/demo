@@ -176,9 +176,6 @@ public class UserInfoController {
         	LoginBean loginBean=(LoginBean)request.getSession().getAttribute("loginInfo");
         	String roleName = userBean.getRoleName();
             List reviewUserList= userInfoService.queryUserOptions(loginBean.getUserName(),roleName);
-        	/*UserBean userBean =new UserBean();
-        	userBean.setUserType("3");
-            GridData<UserBean> gd= userInfoService.findByCondition(0, 0, userBean,null);*/
             resultInfo.setSuccess("true");
             resultInfo.setData(reviewUserList);
         } catch (Exception e) {

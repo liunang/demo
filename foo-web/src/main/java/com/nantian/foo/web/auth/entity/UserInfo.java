@@ -16,6 +16,8 @@ public class UserInfo implements Serializable {
     protected String sex;
     protected String state;
     protected String registerTime;
+    protected Long orgId;
+    protected String orgPath;
     
 
     public UserInfo() {
@@ -105,5 +107,24 @@ public class UserInfo implements Serializable {
     public void setRegisterTime(String registerTime) {
         this.registerTime = registerTime;
     }
-    
+
+    @Basic
+    @Column(name = "org_id")
+    public Long getOrgId() {
+        return orgId;
+    }
+
+    public void setOrgId(Long orgId) {
+        this.orgId = orgId;
+    }
+
+    @Basic
+    @Column(name = "org_path")
+    public String getOrgPath() {
+        return orgPath;
+    }
+
+    public void setOrgPath(String orgPath) {
+        this.orgPath = orgPath;
+    }
 }
