@@ -8,4 +8,4 @@ server:
 
 spring:
   application:
-    name: service-hi
+    name: foo-client
